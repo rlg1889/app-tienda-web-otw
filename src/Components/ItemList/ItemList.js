@@ -1,9 +1,9 @@
-import Item from "../Item/Item.js";
+import Item from '../Item/Item'
 
 const ItemList = ({ productos }) => {
     return (
-        <ul style={{ display: "flex", justifyContent: "space-evenly", flexWrap: "wrap" }} className="listado">
-            {productos.map(prod => <Item key={prod.id} {...prod} />)}
+        <ul>
+            {productos.map(prod=> <Item key={prod.id} {...prod}/>)}
         </ul>
     )
 }

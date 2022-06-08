@@ -1,22 +1,21 @@
 import './ItemListContainer.css'
-import { useEffect, useState } from 'react'
-import { getProducto } from '../DB/Bd';
-import ItemList from '../ItemList/ItemList';
+import { useState, useEffect } from 'react'
+import { getProducto } from '../asyncmock'
+import ItemList from '../ItemList/ItemList.js'
 
-const ItemListContainer = ({mensaje}) => {
+const ItemListContainer = (props) => {
+    const[productos, setProductos]=useState([])
 
-    const [productos, setProductos] = useState([])
-
-    useEffect(() => {
-        getProducto().then(response => {
+    useEffect(() =>{
+        getProducto().then(response =>{
             setProductos(response)
         })
     }, [])
 
     return (
         <section>
-            <h1 className="titulo">{mensaje}</h1>
-            <ItemList productos={productos} />
+            <h1 className="Titulo">{props.greeting}</h1>
+            <ItemList productos={productos}/>
         </section>
     )
 }
