@@ -1,10 +1,16 @@
-const Item = ({ nombre, img , precio }) => {
+import { Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+
+const Item = ({ id, nombre, img , precio }) => {
     return(
-        <li>
-            <img src={img} alt={nombre} height="150"/>
-            {nombre}{"\n\r"}
+        <Card>
+            <Card.Img variant="top" src={img} alt={nombre} height="150"/>
+            <Card.Title>{nombre}{"\n\r"}</Card.Title>
+            <Card.Text>
             {"$"}{precio}
-        </li>
+            </Card.Text>
+            <Link to={`/detail/${id}`} className='Option'>Ver mas</Link>
+        </Card>
     )
 }
 

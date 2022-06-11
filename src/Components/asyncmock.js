@@ -6,11 +6,11 @@ import remera from "./Assets/Remera Bebe - Trex - Marino.jpg";
 
 
 const productos = [
-    {id: '1', nombre: 'Babucha rustica de niño', precio: 1500, img: babucha},
-    {id: '2', nombre: 'Buzo canguro de niño', precio: 2500, img: buzo},
-    {id: '3', nombre: 'Chomba lisa estampada niño', precio: 1200, img: chomba},
-    {id: '4', nombre: 'Jean de niño', precio: 2200, img: jean},
-    {id: '5', nombre: 'Remera bebe', precio: 850, img: remera}
+    {id: '1', nombre: 'Babucha rustica de Bebe', precio: 1500, img: babucha, categoria: 'bebe'},
+    {id: '2', nombre: 'Buzo canguro de Niño', precio: 2500, img: buzo, categoria:'nino'},
+    {id: '3', nombre: 'Chomba lisa estampada Niño', precio: 1200, img: chomba, categoria:'nino'},
+    {id: '4', nombre: 'Jean de Niño', precio: 2200, img: jean, categoria:'nino'},
+    {id: '5', nombre: 'Remera de Bebe', precio: 850, img: remera, categoria: 'bebe'}
     
 ]
 
@@ -18,6 +18,22 @@ export const getProducto = () => {
     return new Promise ((resolve, reject) => {
         setTimeout(() =>{
             resolve(productos)
-        }, 2000)
+        }, 500)
+    })
+}
+
+export const getProductoID = (id) => {
+    return new Promise ((resolve, reject) => {
+        setTimeout(() =>{
+            resolve(productos.find(prod => prod.id === id))
+        }, 500)
+    })
+}
+
+export const getProductoCategoria = (categoriaID) => {
+    return new Promise ((resolve, reject) => {
+        setTimeout(() =>{
+            resolve(productos.filter(prod => prod.categoria === categoriaID))
+        }, 500)
     })
 }
