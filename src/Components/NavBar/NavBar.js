@@ -9,9 +9,9 @@ const NavBar = () =>{
                 <h3>Over the Wave - Baby & kids</h3>
             </Link>
             <div>   
-                <Link to='/categoria/bebe'>Indumentaria de Bebe</Link>
-                <Link to='/categoria/nino'>Indumentaria de Niño</Link>
-                <Link>Tabla de talles</Link>
+                <NavLink to='/categoria/bebe' className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}>Indumentaria de Bebe</NavLink>
+                <NavLink to='/categoria/nino' className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}>Indumentaria de Niño</NavLink>
+                {/* <Link>Tabla de talles</Link> */}
             </div>
             <CartWidget/>
         </nav>
