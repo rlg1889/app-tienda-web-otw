@@ -15,9 +15,9 @@ export const CartProvider = ({ children }) => {
         setTotalQuantity(totalQuantity)
     }, [cart])
   
-    const addItem = (productToAdd) => {
-      if(!isInCart(productToAdd.id)) {
-        setCart([...cart, productToAdd])
+    const addItem = (productoToAdd) => {
+      if(!isInCart(productoToAdd.id)) {
+        setCart([...cart, productoToAdd])
       }
     }
 
@@ -37,7 +37,6 @@ export const CartProvider = ({ children }) => {
             addItem,
             removeItem,
             isInCart,
-            // getCartQuantity
         }}>
             { children }
         </CartContext.Provider>
