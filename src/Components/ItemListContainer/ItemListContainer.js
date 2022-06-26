@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { getProducto , getProductoCategoria} from '../asyncmock'
 import ItemList from '../ItemList/ItemList.js'
 import { useParams } from 'react-router-dom'
+import { collection, getDocs , query , where } from 'firebase/firestore'
+import { db } from '../../services/firebase'
 
 const ItemListContainer = (props) => {
     const [productos, setProductos]=useState([])
@@ -13,24 +15,22 @@ const ItemListContainer = (props) => {
     useEffect(() =>{
         setLoading(true)
 
-        if(!categoriaID){
-            getProducto().then(response =>{
-                setProductos(response)
-            }).catch(error =>{
-                console.log(error)
-            }).finally(()=>{
-                setLoading(false)
+        const collectionRef = categoriaID ? (
+            query(collection(db,'productos'), where('categoria', '==', categoriaID))
+        ) : (collection(db,'productos'))
+
+        getDocs(collectionRef).then(response =>{
+            console.log(response)
+            const productsFormatted = response.docs.map(doc => {
+                return { id: doc.id, ...doc.data() }
             })
-        } else {
-            getProductoCategoria(categoriaID).then(response =>{
-                setProductos(response)
-            }).catch(error =>{
-                console.log(error)
-            }).finally(()=>{
-                setLoading(false)
-            })
-        }
-    }, [categoriaID])
+            setProductos(productsFormatted)
+        }).catch(error => {
+            console.log(error)
+        }).finally(()=> {
+            setLoading(false)
+        })
+        }, [categoriaID])
 
     if(loading) {
         return <h1>Cargando ...</h1>
