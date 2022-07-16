@@ -1,12 +1,14 @@
 import { useState , useEffect } from 'react'
-import { getProductoID } from '../asyncmock'
 import ItemDetail from '../ItemDetail/ItemDetail'
 import { useParams } from 'react-router-dom'
 import { getDoc , doc } from 'firebase/firestore'
 import { db } from '../../services/firebase'
+import './ItemDetailContainer.css'
 
 const ItemDetailContainer = () => {
     const[producto, setProducto] = useState ()
+    const [loading, setLoading] = useState(true)
+
     const {productoID} = useParams()
    
     useEffect(() => {
@@ -17,8 +19,14 @@ const ItemDetailContainer = () => {
             setProducto(productFormatted)
         }).catch(error=>{
             console.log(error)
+        }).finally(() => {
+            setLoading(false)
         })
-    },[])
+    },[productoID])
+
+    if(loading) {
+        return <span class="loader"></span>
+    }
 
     return (
         <>
